@@ -2,7 +2,7 @@
 
 
 ```bash
-pip install -r requirements.txt --pre
+pip install -r requirements.txt
 ```
 
 
