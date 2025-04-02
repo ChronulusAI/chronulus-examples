@@ -48,6 +48,7 @@ jobs:
         env:
           CA_REPOSITORY_NAME: ${{ vars.CA_REPOSITORY_NAME }}
           CA_DOMAIN_NAME: ${{ vars.chronulus-central-artifacts }}
+          CA_AWS_ACCOUNT_ID: ${{ vars.CA_AWS_ACCOUNT_ID }}
           PIP_CONFIG_FILE: /tmp/pip/pip.conf
         run: |
           bash .testing/config.sh
