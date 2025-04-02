@@ -56,6 +56,7 @@ jobs:
         env:
           CHRONULUS_API_KEY: ${{ secrets.CHRONULUS_API_KEY }}
           API_URI: ${{ vars.API_URI }}
+          PIP_CONFIG_FILE: /tmp/pip/pip.conf
         run: |
           cd python-sdk/fed-interest-rate-target
           pip3 install -r requirements.txt
