@@ -36,7 +36,7 @@ jobs:
           role-to-assume: arn:aws:iam::${{ vars.CA_AWS_ACCOUNT_ID }}:role/GitHub
           role-session-name: github-artifacts-access
           aws-region: ${{ vars.AWS_REGION }}
-          profile: CentralArtifacts
+          profile: Artifacts
 
 
       - name: Set up Python
