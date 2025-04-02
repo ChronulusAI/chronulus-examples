@@ -1,0 +1,74 @@
+name: Tests - Dev Stack
+
+on:
+  push:
+    branches: [ 'dev/*' ]
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  GH_TOKEN: ${{ github.token }}
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
+jobs:
+  deploy:
+    name: 'Tests on Dev'
+    runs-on: ubuntu-latest
+    environment: dev-stack
+    permissions:
+      pull-requests: write
+      id-token: write # This is required for requesting the JWT
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+
+      - name: Central Artifacts Credentials for Python Package Distribution
+        uses: krane-labs/gha-aws-oidc-profiles@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.CA_AWS_ACCOUNT_ID }}:role/GitHub
+          role-session-name: github-artifacts-access
+          aws-region: ${{ vars.AWS_REGION }}
+          profile: CentralArtifacts
+
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Configure PIP
+        env:
+          CA_REPOSITORY_NAME: ${{ vars.CA_REPOSITORY_NAME }}
+          CA_DOMAIN_NAME: ${{ vars.chronulus-central-artifacts }}
+          PIP_CONFIG_FILE: /tmp/pip/pip.conf
+        run: |
+          bash .testing/config.sh
+
+      - name: Install and Execute Example
+        env:
+          CHRONULUS_API_KEY: ${{ secrets.CHRONULUS_API_KEY }}
+          API_URI: ${{ vars.API_URI }}
+        run: |
+          cd python-sdk/fed-interest-rate-target
+          pip3 install -r requirements.txt
+          pip3 install --upgrade --pre chronulus 
+          python3 predict.py
+
+
+      - name: Slack Notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        if: always() # This ensures the Slack notification is sent regardless of the job outcome
+
