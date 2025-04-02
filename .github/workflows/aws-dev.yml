@@ -59,8 +59,7 @@ jobs:
           PIP_CONFIG_FILE: /tmp/pip/pip.conf
         run: |
           cd python-sdk/fed-interest-rate-target
-          pip3 install -r requirements.txt
-          pip3 install --upgrade --pre chronulus 
+          pip3 install -r --pre requirements.txt
           python3 predict.py
 
 
