@@ -1,4 +1,4 @@
-chronulus>=0.0.12a
+chronulus>=0.0.13
 matplotlib
 pandas
 scipy
