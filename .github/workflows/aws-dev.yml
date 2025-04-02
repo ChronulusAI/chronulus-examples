@@ -2,7 +2,7 @@ name: Tests - Dev Stack
 
 on:
   push:
-    branches: [ 'dev/*' ]
+    branches: [ 'dev-stack/*' ]
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
