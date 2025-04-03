@@ -1,0 +1,4 @@
+pandas
+streamlit~=1.44.0
+streamlit-cookies-controller
+chronulus>=0.0.13
