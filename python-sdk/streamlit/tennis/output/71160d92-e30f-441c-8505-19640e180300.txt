@@ -1,0 +1,93 @@
+request_id: 71160d92-e30f-441c-8505-19640e180300
+
+(0.5843696541893637, 0.4156303458106363) with Beta(20.21379324045006, 14.376971518699845)
+
+--- Expert 1 ---
+
+[Positive]
+
+Q: What is the probability that Darya Kasatkina will win her Round of 16 match against Sofia Kenin at the 2025 WTA Charleston tournament?
+
+Pred: (63.98%*, 36.02%)
+
+A: Given their head-to-head record is perfectly balanced at 3-3, but this being their first meeting on clay, I expect the surface to be a significant differentiating factor. Clay historically favors Kasatkina's playing style, with her superior movement and defensive capabilities being particularly effective on this surface. Additionally, her recent tournament history in Charleston, reaching the finals last year, demonstrates her comfort on these courts. While Kenin has shown flashes of her former top-level play, her early exit in last year's tournament and lower ranking suggest less consistency. I predict with moderate certainty given the clear surface advantage but acknowledge their competitive history. Results are slightly skewed toward a Kasatkina victory due to the surface advantage and her higher current ranking. There is a relatively low risk of extreme outcomes given both players' demonstrated ability to compete against each other, though the clay court factor introduces some additional variance.
+
+[Negative]
+
+Q: What is the probability that Darya Kasatkina will lose to Sofia Kenin in their Round of 16 match at WTA Charleston?
+
+Pred: (57.58%, 42.42%*)
+
+A: Based on my analysis, I expect a significant chance of a Kasatkina loss given the surface dynamics and recent history. While Kasatkina has demonstrated strong clay court capabilities historically, her particular playing style matches up vulnerably against Kenin's aggressive baseline game. The level of uncertainty in this prediction is moderate, considering their even head-to-head record and the variable nature of early-round matches. Results are slightly skewed toward a higher probability of defeat, given Kenin's recent resurgence in form and previous success on clay courts. Their past matches suggest a pattern of trading victories, and with Kasatkina winning their last encounter, the pendulum could swing the other way. There's a meaningful risk of extreme outcomes, particularly if Kenin finds her rhythm early and exploits Kasatkina's occasional serving vulnerabilities. The tournament's conditions and Kasatkina's previous year's finals appearance do factor in, but don't significantly alter the core probability assessment.
+
+--- Expert 2 ---
+
+[Positive]
+
+Q: What is the probability that Darya Kasatkina will win her Round of 16 match against Sofia Kenin at the 2025 WTA Charleston tournament?
+
+Pred: (68.47%*, 31.53%)
+
+A: I expect Kasatkina to have a significant advantage in this clay court match, given her superior current ranking and strong previous performance at Charleston. Her playing style is particularly well-suited to clay, where her defensive skills and ability to construct points can shine. While their head-to-head record is even, those matches were all on hard courts, which typically favor Kenin's more aggressive style. Results are likely skewed right, reflecting Kasatkina's clay court prowess and recent form. I predict with moderately high certainty given the surface advantage, though there remains some uncertainty due to Kenin's past success as a Grand Slam champion and her ability to raise her level in important matches. The outcomes are quite concentrated around my expected probability, as both players are experienced professionals who should deliver relatively consistent performances. However, there is a small risk of extreme outcomes if either player is dealing with undisclosed physical issues or if weather conditions become a significant factor.
+
+[Negative]
+
+Q: What is the probability that Darya Kasatkina will lose to Sofia Kenin in their Round of 16 match at WTA Charleston?
+
+Pred: (42.60%, 57.40%*)
+
+A: I expect Kasatkina to struggle on clay despite her higher ranking, considering Kenin's recent resurgence and their even head-to-head record. Based on their historical matchups showing equal performance, and Kenin's ability to disrupt rhythm, my expectation sits firmly in favor of an upset. The results are likely skewed toward a Kenin victory, particularly given Kasatkina's potential psychological burden from last year's final loss at this venue. While I predict with moderate certainty around the central estimate, there's some risk of extreme outcomes due to the surface transition and their contrasting styles. The clay court setting introduces additional variability, though Kenin's aggressive baseline game could prove surprisingly effective despite her previous early exit here.
+
+--- Expert 3 ---
+
+[Positive]
+
+Q: What is the probability that Darya Kasatkina will win her Round of 16 match against Sofia Kenin at the 2025 WTA Charleston tournament?
+
+Pred: (67.28%*, 32.72%)
+
+A: I expect Kasatkina to have a clear advantage in this clay court matchup, given her superior recent form and historical success on the surface. While their head-to-head record is even, clay significantly favors Kasatkina's playing style and defensive capabilities. Her previous year's finals appearance at Charleston demonstrates her comfort on these courts, whereas Kenin's early exit suggests potential struggles with the surface. My prediction shows moderate certainty given both players' known capabilities, but results are somewhat skewed toward Kasatkina due to the surface advantage. The defensive nature of clay court tennis and both players' consistent baseline games suggest concentrated results around the expected outcome, with limited risk of extreme variance. However, Kenin's past Grand Slam success and occasional brilliant form creates some possibility of an upset, even if unlikely.
+
+[Negative]
+
+Q: What is the probability that Darya Kasatkina will lose to Sofia Kenin in their Round of 16 match at WTA Charleston?
+
+Pred: (62.69%, 37.31%*)
+
+A: Given the clay court surface at Charleston and Kasatkina's superior recent form and ranking, I expect this outcome to be moderately unlikely. My analysis factors in Kasatkina's strong clay court abilities and her recent finalist showing at this venue, though Kenin's previous success against her on hard courts adds uncertainty. I predict with moderate certainty, considering their evenly matched head-to-head record but on different surfaces. Results are slightly skewed right, acknowledging Kenin's potential for upset despite being lower ranked, given her Grand Slam pedigree. The outcomes are somewhat concentrated around my expectation, though there's a moderate risk of deviation due to Kenin's inconsistent form. The clay court surface distinctly favors Kasatkina's playing style, but Kenin's fighting spirit and their competitive history suggests some potential for an upset.
+
+--- Expert 4 ---
+
+[Positive]
+
+Q: What is the probability that Darya Kasatkina will win her Round of 16 match against Sofia Kenin at the 2024 WTA Charleston tournament?
+
+Pred: (63.67%*, 36.33%)
+
+A: I expect Kasatkina to have a moderate advantage in this clay court matchup given her superior recent form and better historical performance on the surface. Despite their even head-to-head record, those matches were all on hard courts, and Kasatkina's game is particularly well-suited to clay. Her performance reaching the finals last year in Charleston demonstrates her comfort on these courts, while Kenin's early exit suggests some difficulty adapting to the surface. Results are likely skewed slightly toward Kasatkina given the surface advantage, though their previous competitive history suggests potential for a close match. I predict with moderate certainty as both players have shown inconsistency this season, and Kenin has demonstrated the ability to raise her level in important matches. There is a low risk of extreme outcomes given both players' experience and their historically competitive matches.
+
+[Negative]
+
+Q: What is the probability that Darya Kasatkina will lose to Sofia Kenin in their Round of 16 match at WTA Charleston?
+
+Pred: (57.91%, 42.09%*)
+
+A: After analyzing the matchup, I expect Kasatkina to face significant challenges despite her higher ranking. My certainty in this prediction is moderate given the even head-to-head record between these players. Results are somewhat skewed toward a Kasatkina defeat due to Kenin's proven ability to compete with top players and her potential for upset victories. The clay court surface introduces additional uncertainty, as neither player has faced each other on this surface before. While Kasatkina showed strong form reaching the finals last year, suggesting she's comfortable on these courts, Kenin has demonstrated the ability to elevate her game in important matches. The distribution of possible outcomes shows a moderate concentration around my central estimate, reflecting the competitive nature of their previous encounters. Their historical matchups being split evenly at 3-3 suggests this could be another close contest with real upset potential.
+
+--- Expert 5 ---
+
+[Positive]
+
+Q: What is the probability that Darya Kasatkina will win her Round of 16 match against Sofia Kenin at the 2025 WTA Charleston tournament?
+
+Pred: (67.58%*, 32.42%)
+
+A: Given the historical context and surface conditions, I expect Kasatkina to have a notable advantage in this matchup. While their head-to-head record is even, Kasatkina's superior clay court abilities and recent tournament history at Charleston suggest stronger performance potential. My prediction reflects moderate certainty given both players' demonstrated ability to compete at high levels. Results are somewhat skewed toward Kasatkina's favor due to her higher ranking and better adaptation to clay courts. The tournament conditions and venue familiarity further support Kasatkina, though there remains a chance of surprise given Kenin's proven ability to elevate her game in important matches. The outcomes are relatively concentrated around the expected win probability, with moderate tail risk reflecting the inherent volatility of tennis matchups.
+
+[Negative]
+
+Q: What is the probability that Darya Kasatkina will lose to Sofia Kenin in their Round of 16 match at WTA Charleston?
+
+Pred: (57.56%, 42.44%*)
+
+A: I expect Kasatkina to face significant challenges in this match despite her higher ranking, given several contextual factors. While Kasatkina reached the finals last year, showing strong clay court capabilities, Kenin has proven herself to be a formidable opponent in their previous encounters on hard courts. The even head-to-head record suggests a competitive matchup, though this will be their first meeting on clay. My confidence in this prediction is moderate, as both players have shown inconsistency in recent performances. The distribution is slightly skewed towards a higher probability of Kasatkina losing, considering Kenin's potential for upset victories and her ability to raise her game against higher-ranked opponents. The outcomes are relatively concentrated around my expectation, though there's some risk of extreme results given both players' variable form and the surface transition.

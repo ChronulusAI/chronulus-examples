@@ -2,6 +2,7 @@ import base64
 import os
 from datetime import datetime
 from io import BytesIO
+import json
 
 import streamlit as st
 from PIL import Image
@@ -81,6 +82,7 @@ class MatchContext(BaseModel):
     contest_name: str = Field(description="Name of the contest or tournament")
     location: str = Field(description="Location of tournament and contest")
     match_date: str = Field(description="Date of match")
+    contest_details: str = Field(description="Additional details on the contest that affect both sides, eg. weather or previous history between the players")
     side1: str = Field(description="The name(s) of the player(s) on side1")
     side2: str = Field(description="The name(s) of the player(s) on side2")
     side1_details: str = Field(description="Additional context or details about side1")
@@ -98,23 +100,36 @@ if os.environ.get('CHRONULUS_API_KEY'):
 api_key_cookie = controller.get('CHRONULUS_API_KEY')
 
 st.subheader("Chronulus Config")
-st.markdown("Fill out the details below and then click 'Predict'.")
+st.markdown("""
+This app requires a `CHRONULUS_API_KEY` along with an active subscription. 
 
-api_key = st.text_input(label="Chronulus API Key", value=api_key_cookie if api_key_cookie else "")
-agent = None
+To get yours, login to [console.chronulus.com](https://console.chronulus.com) and 
+click [Get API Keys](https://console.chronulus.com/api-keys). 
 
-if api_key:
-    controller.set('CHRONULUS_API_KEY', api_key)
+If you have not subscribed, you can sign-up or manage your subscription on the 
+[Billing](https://console.chronulus.com/billing) page.
 
-    active_env = dict(CHRONULUS_API_KEY=api_key)
-    estimator_id = controller.get('CHRONULUS_ESTIMATOR_ID')  # dev
-    session_id = controller.get('CHRONULUS_SESSION_ID')     # dev
+""")
+with st.expander("See your Chronulus API Key", expanded=api_key_cookie is None):
+    api_key = st.text_input(
+        label="Chronulus API Key",
+        value=api_key_cookie if api_key_cookie else "",
+        placeholder="Your Chronulus API Key"
+    )
 
-    chronulus_session = get_session(session_id, env=active_env)
-    controller.set("CHRONULUS_SESSION_ID", chronulus_session.session_id)
+    agent = None
+    if api_key:
+        controller.set('CHRONULUS_API_KEY', api_key)
 
-    agent = get_agent(chronulus_session, input_type=MatchContext, estimator_id=estimator_id, env=active_env)
-    controller.set("CHRONULUS_ESTIMATOR_ID", agent.estimator_id)
+        active_env = dict(CHRONULUS_API_KEY=api_key)
+        estimator_id = None
+        session_id = controller.get('CHRONULUS_SESSION_ID')
+
+        chronulus_session = get_session(session_id, env=active_env)
+        controller.set("CHRONULUS_SESSION_ID", chronulus_session.session_id)
+
+        agent = get_agent(chronulus_session, input_type=MatchContext, estimator_id=estimator_id, env=active_env)
+        controller.set("CHRONULUS_ESTIMATOR_ID", agent.estimator_id)
 
 st.subheader("Contest Details")
 st.markdown("Fill out the details below and then click 'Predict'.")
@@ -122,6 +137,7 @@ st.markdown("Fill out the details below and then click 'Predict'.")
 contest_name = st.text_input(label="Contest Name", placeholder="Name of the contest. E.g., 'ATP US Open - Round of 64'")
 location = st.text_input(label="Location", placeholder="Location of match. E.g., Court 5, Miami, FL")
 match_date = st.date_input('Date of match', value=datetime.today().date())
+contest_details = st.text_area(label="Contest Details", placeholder="Additional details on the contest that affect both sides, eg. weather or previous history between the players")
 side1 = st.text_input(label="Side 1", placeholder="Name(s) and rank(s) of Side 1")
 side1_details = st.text_area(label="Side 1 Details")
 side2 = st.text_input(label="Side 2", placeholder="Name(s) and rank(s) of Side 2")
@@ -136,7 +152,7 @@ side1_images = process_uploaded_images(uploaded_side1_files, related_to=side1, d
 side2_images = process_uploaded_images(uploaded_side2_files, related_to=side2, display_label='Side 2')
 
 
-num_experts = st.text_input(label="Number of Experts", value=5)
+num_experts = int(st.text_input(label="Number of Experts", value=5))
 
 reverse_order = st.toggle("Reverse Order of Sides", value=False)
 
@@ -150,6 +166,7 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
         contest_name=contest_name,
         location=location,
         match_date=str(match_date),
+        contest_details=contest_details,
         side1=side2 if reverse_order else side1,
         side2=side1 if reverse_order else side2,
         side1_details=side2_details if reverse_order else side1_details,
@@ -171,6 +188,22 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
     ]
     final_output = "\n\n".join(lines)
     st.markdown(final_output, unsafe_allow_html=True)
+
+    os.makedirs("output", exist_ok=True)
+    os.makedirs("inputs", exist_ok=True)
+
+    with open(f"output/{req.request_id}.txt", "w") as f:
+        f.write(final_output)
+
+    with open(f"output/{req.request_id}.json", "w") as f:
+        json_str = json.dumps(prediction_set.to_dict(), indent=2)
+        f.write(json_str)
+
+    with open(f"inputs/{req.request_id}.json", "w") as f:
+        json_str = json.dumps(item.model_dump(), indent=2)
+        f.write(json_str)
+
+
 
 
 
