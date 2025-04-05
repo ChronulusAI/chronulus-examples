@@ -189,19 +189,21 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
     final_output = "\n\n".join(lines)
     st.markdown(final_output, unsafe_allow_html=True)
 
-    os.makedirs("output", exist_ok=True)
-    os.makedirs("inputs", exist_ok=True)
+    if os.environ.get('IS_DEPLOYED'):
 
-    with open(f"output/{req.request_id}.txt", "w") as f:
-        f.write(final_output)
+        os.makedirs("output", exist_ok=True)
+        os.makedirs("inputs", exist_ok=True)
 
-    with open(f"output/{req.request_id}.json", "w") as f:
-        json_str = json.dumps(prediction_set.to_dict(), indent=2)
-        f.write(json_str)
+        with open(f"output/{req.request_id}.txt", "w") as f:
+            f.write(final_output)
 
-    with open(f"inputs/{req.request_id}.json", "w") as f:
-        json_str = json.dumps(item.model_dump(), indent=2)
-        f.write(json_str)
+        with open(f"output/{req.request_id}.json", "w") as f:
+            json_str = json.dumps(prediction_set.to_dict(), indent=2)
+            f.write(json_str)
+
+        with open(f"inputs/{req.request_id}.json", "w") as f:
+            json_str = json.dumps(item.model_dump(), indent=2)
+            f.write(json_str)
 
 
 
