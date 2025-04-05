@@ -1,5 +1,6 @@
 import base64
 import os
+import sys
 from datetime import datetime
 from io import BytesIO
 import json
@@ -7,6 +8,7 @@ import json
 import streamlit as st
 from PIL import Image
 from streamlit_cookies_controller import CookieController
+from pages._menu import menu
 
 st.set_page_config(
     page_title="Chronulus | Tennis Prediction",
@@ -14,7 +16,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="auto"
 )
-
+menu()
 
 from pydantic import BaseModel, Field
 from chronulus import Session
@@ -76,6 +78,20 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
     else:
         agent = BinaryPredictor.load_from_saved_estimator(estimator_id, env=env)
     return agent
+
+
+def update_request_list_store(request_info: dict):
+    request_list_str = controller.get('request_list')
+    if request_list_str:
+        request_list = json.loads(request_list_str)
+    else:
+        request_list = []
+
+    request_list.append(request_info)
+    if sys.getsizeof(json.dumps(request_list)) > 4096:
+        request_list = request_list[:-1]
+
+    controller.set('request_list', json.dumps(request_list))
 
 
 class MatchContext(BaseModel):
@@ -189,7 +205,17 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
     final_output = "\n\n".join(lines)
     st.markdown(final_output, unsafe_allow_html=True)
 
-    if st.secrets.get('IS_DEPLOYED'):
+    # add request to list in cookies
+    request_info = dict(
+        request_id=req.request_id,
+        side1=side1,
+        side2=side2,
+        timestamp=datetime.now().timestamp(),
+        reverse_order=reverse_order,
+    )
+    update_request_list_store(request_info)
+
+    if 'IS_DEPLOYED' not in st.secrets.keys():
 
         os.makedirs("output", exist_ok=True)
         os.makedirs("inputs", exist_ok=True)
