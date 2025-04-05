@@ -12,7 +12,7 @@ st.set_page_config(
     page_title="Chronulus | Tennis Prediction",
     page_icon=":tennis:",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 
 
@@ -189,7 +189,7 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
     final_output = "\n\n".join(lines)
     st.markdown(final_output, unsafe_allow_html=True)
 
-    if os.environ.get('IS_DEPLOYED'):
+    if st.secrets.get('IS_DEPLOYED'):
 
         os.makedirs("output", exist_ok=True)
         os.makedirs("inputs", exist_ok=True)
