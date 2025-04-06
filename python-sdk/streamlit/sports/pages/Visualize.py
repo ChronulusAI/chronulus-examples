@@ -13,14 +13,15 @@ from streamlit_cookies_controller import CookieController
 from pages._menu import menu
 
 st.set_page_config(
-    page_title="Chronulus | Tennis Prediction",
-    page_icon=":tennis:",
+    page_title="Visualize Prediction Sets | Chronulus",
+    page_icon=":notebook_with_decorative_cover:",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 menu()
 controller = CookieController()
+
 
 def word_wrap(text, width=40):
     """
@@ -77,26 +78,6 @@ def get_request_list_store():
 
     return original_orderings, reverse_orderings
 
-
-if os.environ.get('CHRONULUS_API_KEY'):
-    controller.set("CHRONULUS_API_KEY", os.environ.get('CHRONULUS_API_KEY'))
-
-api_key_cookie = controller.get('CHRONULUS_API_KEY')
-
-with st.expander("See your Chronulus API Key", expanded=api_key_cookie is None):
-    api_key = st.text_input(
-        label="Chronulus API Key",
-        value=api_key_cookie if api_key_cookie else "",
-        placeholder="Your Chronulus API Key"
-    )
-
-    agent = None
-    if api_key:
-        controller.set('CHRONULUS_API_KEY', api_key)
-
-        active_env = dict(CHRONULUS_API_KEY=api_key)
-
-
 def plot_beta(param_list, labels, notes):
     colors = px.colors.sequential.Plasma
     colors = px.colors.qualitative.Vivid
@@ -144,19 +125,6 @@ def plot_beta(param_list, labels, notes):
 
     # Display the plot in Streamlit
     st.plotly_chart(fig, use_container_width=True)
-
-original, reverse = get_request_list_store()
-
-
-if api_key:
-
-    req_side1 = st.selectbox('Request Id (original order)', options=original, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')}")
-    req1_id = req_side1.get('request_id')
-    req_side2 = st.selectbox('Request Id (reverse order)', options=reverse, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')}")
-    req2_id = req_side2.get('request_id')
-
-    pred_set1 = get_prediction_set(req1_id, env=active_env)
-    pred_set2 = get_prediction_set(req2_id, env=active_env)
 
 
 def plot_prediction_set(prediction_set):
@@ -210,47 +178,65 @@ def plot_prediction_set(prediction_set):
         plot_beta([(alpha, beta)], labels=["Consensus"], notes=[note])
 
 
-with st.expander("Consensus Over Orderings", expanded=True):
+api_key = controller.get('CHRONULUS_API_KEY')
 
-    if api_key and req1_id and req2_id:
-        param_list = []
-        labels = []
-        notes = []
+if not api_key:
+    st.subheader("API Key Not Found")
+    st.write("Your Chronulus API could not be found.")
 
-        alpha1, beta1 = pred_set1.beta_params.model_dump().values()
-        note = f'Pred ({100 * pred_set1.prob[0]:.2f}%, {100 * pred_set1.prob[1]:.2f}%)'
-        param_list.append((alpha1, beta1))
-        labels.append(f"Consensus (original)")
-        notes.append(note)
+if api_key:
+    active_env = dict(CHRONULUS_API_KEY=api_key)
 
-        beta2, alpha2 = pred_set2.beta_params.model_dump().values()
-        note = f'Pred ({100 * pred_set2.prob[1]:.2f}%, {100 * pred_set2.prob[0]:.2f}%)'
-        param_list.append((alpha2, beta2))
-        labels.append(f"Consensus (reverse)")
-        notes.append(note)
+    original, reverse = get_request_list_store()
 
-        alpha3 = (alpha1 + alpha2) / 2
-        beta3 = (beta1 + beta2) / 2
-        prob_a = alpha3 / (alpha3+beta3)
-        prob_b = beta3 / (alpha3+beta3)
-        note = f'Pred ({100 * prob_a:.2f}%, {100 * prob_b:.2f}%)'
-        param_list.append((alpha3, beta3))
-        labels.append(f"Consensus (overall)")
-        notes.append(note)
+    req_side1 = st.selectbox('Request Id (original order)', options=original, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')} - ({x.get('request_id')})")
+    req_side2 = st.selectbox('Request Id (reverse order)', options=reverse, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')} - ({x.get('request_id')})")
 
-        plot_beta(param_list, labels=labels, notes=notes)
+    req1_id = req_side1.get('request_id') if isinstance(req_side1, dict) else None
+    req2_id = req_side2.get('request_id') if isinstance(req_side2, dict) else None
 
+    if req1_id and req2_id:
+        pred_set1 = get_prediction_set(req1_id, env=active_env)
+        pred_set2 = get_prediction_set(req2_id, env=active_env)
 
+        with st.expander("Consensus Over Orderings", expanded=True):
 
-with st.expander("Original Ordering", expanded=True):
-    if api_key and req1_id:
-        plot_prediction_set(pred_set1)
+            if api_key and req1_id and req2_id:
+                param_list = []
+                labels = []
+                notes = []
 
+                alpha1, beta1 = pred_set1.beta_params.model_dump().values()
+                note = f'Pred ({100 * pred_set1.prob[0]:.2f}%, {100 * pred_set1.prob[1]:.2f}%)'
+                param_list.append((alpha1, beta1))
+                labels.append(f"Consensus (original)")
+                notes.append(note)
 
-with st.expander("Reverse Ordering", expanded=True):
+                beta2, alpha2 = pred_set2.beta_params.model_dump().values()
+                note = f'Pred ({100 * pred_set2.prob[1]:.2f}%, {100 * pred_set2.prob[0]:.2f}%)'
+                param_list.append((alpha2, beta2))
+                labels.append(f"Consensus (reverse)")
+                notes.append(note)
 
-    if api_key and req2_id:
-        plot_prediction_set(pred_set2)
+                alpha3 = (alpha1 + alpha2) / 2
+                beta3 = (beta1 + beta2) / 2
+                prob_a = (alpha1 + alpha2) / (alpha1 + alpha2 + beta1 + beta2)
+                prob_b = 1-prob_a
+                note = f'Pred ({100 * prob_a:.2f}%, {100 * prob_b:.2f}%)'
+                param_list.append((alpha3, beta3))
+                labels.append(f"Consensus (overall)")
+                notes.append(note)
+
+                plot_beta(param_list, labels=labels, notes=notes)
+
+        with st.expander("Original Ordering", expanded=True):
+            if api_key and req1_id:
+                plot_prediction_set(pred_set1)
+
+        with st.expander("Reverse Ordering", expanded=True):
+
+            if api_key and req2_id:
+                plot_prediction_set(pred_set2)
 
 
 
