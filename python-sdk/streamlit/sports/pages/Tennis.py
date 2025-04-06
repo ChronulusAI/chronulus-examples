@@ -75,6 +75,7 @@ class MatchContext(BaseModel):
 controller = CookieController()
 
 api_key = controller.get('CHRONULUS_API_KEY')
+agent = None
 
 if not api_key:
     st.subheader("API Key Not Found")
