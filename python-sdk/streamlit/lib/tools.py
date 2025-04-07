@@ -54,7 +54,7 @@ def get_zip_file(page: str):
         request_id = st.session_state[f"{page}_request_id_prepared"]
         input_context = st.session_state[f"{page}_inputs"]
         output_data = st.session_state[f"{page}_predictions"]
-        output_text = st.session_state[f"{page}_request_id_prepared"]
+        output_text = st.session_state[f"{page}_output_text"]
 
         with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
             # Add JSON files to the ZIP
