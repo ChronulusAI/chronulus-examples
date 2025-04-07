@@ -1,5 +1,5 @@
 import streamlit as st
-from pages._menu import menu
+from pages._sports_menu import menu
 
 st.set_page_config(
     page_title="Chronulus Demos",

@@ -1,16 +1,9 @@
 import os
 
-from chronulus.estimator.binary_predictor import BinaryPredictor
-
-import plotly.graph_objects as go
-import plotly.express as px
-import numpy as np
-from scipy import stats
-import json
-
 import streamlit as st
 from streamlit_cookies_controller import CookieController
-from pages._menu import menu
+
+from pages._sports_menu import menu
 
 st.set_page_config(
     page_title="Chronulus | Tennis Prediction",
@@ -43,7 +36,8 @@ api_key_cookie = controller.get('CHRONULUS_API_KEY')
 api_key = st.text_input(
     label="Chronulus API Key",
     value=api_key_cookie if api_key_cookie else "",
-    placeholder="Enter your Chronulus API Key here"
+    placeholder="Enter your Chronulus API Key here",
+    type="password",
 )
 
 agent = None

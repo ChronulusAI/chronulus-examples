@@ -10,7 +10,7 @@ import json
 
 import streamlit as st
 from streamlit_cookies_controller import CookieController
-from pages._menu import menu
+from pages._sports_menu import menu
 
 st.set_page_config(
     page_title="Visualize Prediction Sets | Chronulus",
@@ -20,6 +20,16 @@ st.set_page_config(
 )
 
 menu()
+
+st.subheader("Visualize Prediction Sets")
+st.markdown("""
+This demo provides tools for visualizing predictions sets from the sports prediction demos.
+
+In the boxes below, select the prediction set from both an original and reserve ordering on the same match-up.
+
+""")
+
+
 controller = CookieController()
 
 
@@ -78,8 +88,8 @@ def get_request_list_store():
 
     return original_orderings, reverse_orderings
 
+
 def plot_beta(param_list, labels, notes):
-    colors = px.colors.sequential.Plasma
     colors = px.colors.qualitative.Vivid
     # Generate x values for the distribution
     x = np.linspace(0, 1, 1000)
@@ -187,13 +197,13 @@ if not api_key:
 if api_key:
     active_env = dict(CHRONULUS_API_KEY=api_key)
 
-    original, reverse = get_request_list_store()
+    original_set, reversed_set = get_request_list_store()
 
-    req_side1 = st.selectbox('Request Id (original order)', options=original, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')} - ({x.get('request_id')})")
-    req_side2 = st.selectbox('Request Id (reverse order)', options=reverse, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')} - ({x.get('request_id')})")
+    req_set1 = st.selectbox('Prediction Set 1 (Original)', options=original_set, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')} - ({x.get('request_id')})")
+    req_set2 = st.selectbox('Prediction Set 2 (Reversed)', options=reversed_set, format_func=lambda x: f"{x.get('side1')} vs {x.get('side2')} - ({x.get('request_id')})")
 
-    req1_id = req_side1.get('request_id') if isinstance(req_side1, dict) else None
-    req2_id = req_side2.get('request_id') if isinstance(req_side2, dict) else None
+    req1_id = req_set1.get('request_id') if isinstance(req_set1, dict) else None
+    req2_id = req_set2.get('request_id') if isinstance(req_set2, dict) else None
 
     if req1_id and req2_id:
         pred_set1 = get_prediction_set(req1_id, env=active_env)
@@ -229,14 +239,17 @@ if api_key:
 
                 plot_beta(param_list, labels=labels, notes=notes)
 
-        with st.expander("Original Ordering", expanded=True):
-            if api_key and req1_id:
-                plot_prediction_set(pred_set1)
+    with st.expander("Original Ordering", expanded=True):
 
-        with st.expander("Reverse Ordering", expanded=True):
+        if api_key and req1_id:
+            pred_set1 = get_prediction_set(req1_id, env=active_env)
+            plot_prediction_set(pred_set1)
 
-            if api_key and req2_id:
-                plot_prediction_set(pred_set2)
+    with st.expander("Reverse Ordering", expanded=True):
+
+        if api_key and req2_id:
+            pred_set2 = get_prediction_set(req2_id, env=active_env)
+            plot_prediction_set(pred_set2)
 
 
 

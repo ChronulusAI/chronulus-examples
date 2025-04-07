@@ -10,8 +10,8 @@ from chronulus_core.types.attribute import Image as ImageType
 from pydantic import BaseModel, Field
 from streamlit_cookies_controller import CookieController
 
-from pages._menu import menu
-from pages._tools import get_zip_file, process_uploaded_images, update_request_list_store
+from lib.tools import get_zip_file, process_uploaded_images, update_request_list_store
+from pages._sports_menu import menu
 
 st.set_page_config(
     page_title="Basketball Predictions | Chronulus",
@@ -31,7 +31,7 @@ def get_session(session_id: str = None, env: dict = dict()):
             situation="""
                 I am a professional forecaster who places wagers on sporting events. I would like to improve my 
                 chances of winning by getting independent insights and win probability estimates to use as signals for 
-                the size of my wagers on sports matches.
+                the size of my wagers on basketball games.
                 """,
             task="""
                 Please predict the probability that side1 (team) will win the match against
@@ -55,6 +55,24 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
     else:
         agent = BinaryPredictor.load_from_saved_estimator(estimator_id, env=env)
     return agent
+
+
+st.subheader("Basketball Predictions")
+st.markdown("""
+This demo is set estimate the win probabilities for a basketball games.
+
+We assume the team listed first on the schedule is side 1 and the team listed second is side 2.
+
+**Reverse Order of Sides**: When toggled on, this flips the order that the sides are input to the Chronulus Agent and
+provides a prediction that mitigates the framing bias that is imposed by the original order as listed on the schedule.
+
+The AI behind the Chronulus Agent was trained before Jan 1, 2025 and we have not given it internet search capabilities.
+So the agent is unaware of any outside win predictions or odds unless you provide them as inputs. As a best practice,
+providing your own inputs is the best way to ensure external opinion is not introduced to your predictions. For example,
+when taking a screen shot of a match-up, be sure to select on the areas with relevant information out the player. Many 
+sites have adds or odds near other useful player stats. Including these in the screenshot could lead to predictions that
+are swayed in the direction of the odds provided by the site.
+""")
 
 
 class GameContext(BaseModel):
