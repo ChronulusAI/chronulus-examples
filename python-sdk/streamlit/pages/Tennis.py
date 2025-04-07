@@ -10,7 +10,7 @@ from chronulus_core.types.attribute import Image as ImageType
 from pydantic import BaseModel, Field
 from streamlit_cookies_controller import CookieController
 
-from lib.tools import get_zip_file, process_uploaded_images, update_request_list_store
+from lib.tools import get_zip_file, process_uploaded_images, update_request_list_store, cache_inputs_and_outputs_state
 from pages._sports_menu import menu
 
 st.set_page_config(
@@ -74,7 +74,6 @@ when taking a screen shot of a match-up, be sure to select on the areas with rel
 sites have adds or odds near other useful player stats. Including these in the screenshot could lead to predictions that
 are swayed in the direction of the odds provided by the site.
 """)
-
 
 
 class MatchContext(BaseModel):
@@ -144,6 +143,7 @@ st.subheader("Predictions")
 
 st.markdown("Fill out the details above and then click 'Predict'.")
 
+
 if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
 
     item = MatchContext(
@@ -170,6 +170,7 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
         f"{prediction_set.prob} with Beta({prediction_set.beta_params.alpha}, {prediction_set.beta_params.beta})",
         output
     ]
+
     final_output = "\n\n".join(lines)
 
 
@@ -181,11 +182,18 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
     )
     input_context_json_str = json.dumps(input_context, indent=2)
 
-    st.download_button("Download Inputs & Outputs (.zip)",
-                       data=get_zip_file(req.request_id, input_context_json_str, predictions_json_str, final_output),
-                       file_name=f'{req.request_id}-package.zip',
-                       mime='application/zip',
-                       )
+    cache_inputs_and_outputs_state('tennis', req.request_id, input_context_json_str, predictions_json_str, final_output)
+
+    zip_data, zip_filename = get_zip_file(page="tennis")
+
+    if zip_filename:
+        st.download_button("Download Inputs & Outputs (.zip)",
+                           data=zip_data,
+                           file_name=zip_filename,
+                           mime='application/zip',
+                           disabled=zip_data is None,
+                           key="download_current"
+                           )
 
     st.markdown(final_output, unsafe_allow_html=True)
 
@@ -213,7 +221,15 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
         with open(f"output/{req.request_id}.json", "w") as f:
             f.write(predictions_json_str)
 
-
+else:
+    zip_data, zip_filename = get_zip_file(page="tennis")
+    st.download_button("Download Inputs & Outputs (.zip)",
+                       data=zip_data,
+                       file_name=zip_filename,
+                       mime='application/zip',
+                       disabled=zip_filename is None,
+                       key='download-previous'
+                       )
 
 
 

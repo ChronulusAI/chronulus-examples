@@ -20,5 +20,5 @@ st.markdown("""
     * [Tennis](/Tennis)
 3. Enter the information about the match up that you would like to predict and click `Predict`.
 4. Toggle `Reverse Order of Sides` and `Predict` again to collect a de-biasing framing.
-5. [Visualize](/Visualized) and explore your Original and Reversed Prediction Sets
+5. [Visualize](/Visualize) and explore your Original and Reversed Prediction Sets
 """)

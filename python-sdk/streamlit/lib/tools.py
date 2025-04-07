@@ -40,14 +40,31 @@ def update_request_list_store(cookie_controler, request_info: dict):
     cookie_controler.set('request_list', json.dumps(request_list))
 
 
-def get_zip_file(request_id, input_context: str, output_data: str, output_text: str):
-    zip_buffer = io.BytesIO()
-    with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
-        # Add JSON files to the ZIP
-        zip_file.writestr(f'{request_id}-input_context.json', input_context)
-        zip_file.writestr(f'{request_id}-output_data.json', output_data)
-        # Add text file to the ZIP
-        zip_file.writestr(f'{request_id}-output_text.txt', output_text)
+def cache_inputs_and_outputs_state(page: str, request_id: str, inputs: str, predictions: str, output_text: str):
+    # Replace these with your actual file contents
+    st.session_state[f"{page}_inputs"] = inputs
+    st.session_state[f"{page}_predictions"] = predictions
+    st.session_state[f"{page}_output_text"] = output_text
+    st.session_state[f"{page}_request_id_prepared"] = request_id
 
-    zip_buffer.seek(0)
-    return zip_buffer.getvalue()
+
+def get_zip_file(page: str):
+    zip_buffer = io.BytesIO()
+    if f"{page}_request_id_prepared" in st.session_state.keys():
+        request_id = st.session_state[f"{page}_request_id_prepared"]
+        input_context = st.session_state[f"{page}_inputs"]
+        output_data = st.session_state[f"{page}_predictions"]
+        output_text = st.session_state[f"{page}_request_id_prepared"]
+
+        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+            # Add JSON files to the ZIP
+            zip_file.writestr(f'{request_id}-input_context.json', input_context)
+            zip_file.writestr(f'{request_id}-output_data.json', output_data)
+            # Add text file to the ZIP
+            zip_file.writestr(f'{request_id}-output_text.txt', output_text)
+
+        zip_buffer.seek(0)
+        return zip_buffer.getvalue(), f'{request_id}-package.zip'
+    else:
+        zip_buffer.seek(0)
+        return zip_buffer.getvalue(), None
