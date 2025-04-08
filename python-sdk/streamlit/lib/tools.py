@@ -4,6 +4,7 @@ import zipfile
 import base64
 import streamlit as st
 from PIL import Image
+from typing import Optional
 import json
 
 def encode_image(image):
@@ -12,7 +13,7 @@ def encode_image(image):
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
 
-def process_uploaded_images(uploaded_files, related_to: str, display_label: str):
+def process_uploaded_images(uploaded_files, related_to: Optional[str], display_label: str):
     if uploaded_files:
         num_uploaded = len(uploaded_files)
         st.write(f"{display_label} Images ({num_uploaded}):")

@@ -3,7 +3,7 @@ import os
 import streamlit as st
 from streamlit_cookies_controller import CookieController
 
-from pages._sports_menu import menu
+from pages._menu import menu
 
 st.set_page_config(
     page_title="Chronulus | Tennis Prediction",

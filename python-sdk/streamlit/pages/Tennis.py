@@ -11,7 +11,8 @@ from pydantic import BaseModel, Field
 from streamlit_cookies_controller import CookieController
 
 from lib.tools import get_zip_file, process_uploaded_images, update_request_list_store, cache_inputs_and_outputs_state
-from pages._sports_menu import menu
+from local_types.request import SportsWinProb
+from pages._menu import menu
 
 st.set_page_config(
     page_title="Tennis Predictions | Chronulus",
@@ -102,13 +103,13 @@ if not api_key:
 if api_key:
     active_env = dict(CHRONULUS_API_KEY=api_key)
     estimator_id = None
-    session_id = controller.get('CHRONULUS_SESSION_ID')
+    session_id = controller.get('CHRONULUS_TENNIS_SESSION_ID')
 
     chronulus_session = get_session(session_id, env=active_env)
-    controller.set("CHRONULUS_SESSION_ID", chronulus_session.session_id)
+    controller.set("CHRONULUS_TENNIS_SESSION_ID", chronulus_session.session_id)
 
     agent = get_agent(chronulus_session, input_type=MatchContext, estimator_id=estimator_id, env=active_env)
-    controller.set("CHRONULUS_ESTIMATOR_ID", agent.estimator_id)
+    controller.set("CHRONULUS_TENNIS_ESTIMATOR_ID", agent.estimator_id)
 
 st.subheader("Contest Details")
 st.markdown("Fill out the details below and then click 'Predict'.")
@@ -198,14 +199,14 @@ if st.button("Predict", disabled=not (api_key or agent)) and side1 and side2:
     st.markdown(final_output, unsafe_allow_html=True)
 
     # add request to list in cookies
-    request_info = dict(
+    request_info = SportsWinProb(
         request_id=req.request_id,
         side1=side1,
         side2=side2,
         timestamp=datetime.now().timestamp(),
         reverse_order=reverse_order,
     )
-    update_request_list_store(controller, request_info)
+    update_request_list_store(controller, request_info.model_dump())
 
     if 'IS_DEPLOYED' not in st.secrets.keys() or not st.secrets.get("IS_DEPLOYED"):
 
