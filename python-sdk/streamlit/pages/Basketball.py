@@ -59,7 +59,7 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
 
 st.subheader("Basketball Predictions")
 st.markdown("""
-This demo is set estimate the win probabilities for a basketball games.
+This demo is estimate the win probabilities for a basketball game.
 
 We assume the team listed first on the schedule is side 1 and the team listed second is side 2.
 

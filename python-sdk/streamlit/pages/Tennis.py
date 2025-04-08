@@ -60,7 +60,7 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
 
 st.subheader("Tennis Predictions")
 st.markdown("""
-This demo is set estimate the win probabilities for a singles or doubles match.
+This demo is estimate the win probabilities for a singles or doubles match.
 
 We assume the player(s) listed first on the schedule are side 1 and the player(s) listed second are side 2.
 
