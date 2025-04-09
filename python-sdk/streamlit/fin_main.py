@@ -17,7 +17,7 @@ st.markdown("""
 
 1. Go to [Settings](/Settings) and enter your `CHRONULUS_API_KEY`
 2. Select one of the demos from the sidebar:
-    * [VC Regret Minimization](/VC_Regret_Min)
+    * [Missed Opportunity Regret Prediction](/RegretPrediction)
 3. Enter the information about the match up that you would like to predict and click `Predict`.
 5. [Visualize](/Visualize) and explore your Prediction Sets
 """)

@@ -7,7 +7,7 @@ def menu():
 
     if entry and entry == 'fin':
         st.sidebar.page_link("fin_main.py", label="Home")
-        st.sidebar.page_link("pages/VC_Regret_Min.py", label="Missed Opportunity Prediction")
+        st.sidebar.page_link("pages/RegretPrediction.py", label="Missed Opportunity Prediction")
         st.sidebar.page_link("pages/FinVisualize.py", label="Visualize Prediction Sets")
         st.sidebar.page_link("pages/Settings.py", label="Settings")
 

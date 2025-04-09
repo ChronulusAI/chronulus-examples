@@ -60,11 +60,9 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
     return agent
 
 
-st.subheader("Missed Opportunity Regret Prediction")
+st.header("Missed Opportunity Regret Prediction")
 st.markdown("""
-This demo is set estimate the win probabilities for a singles or doubles match.
-
-
+This demo is set estimate the probability of regretting a missed investment opportunity.
 """)
 
 
