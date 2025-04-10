@@ -6,7 +6,7 @@ from streamlit_cookies_controller import CookieController
 from pages._menu import menu
 
 st.set_page_config(
-    page_title="Chronulus | Tennis Prediction",
+    page_title="Settings | Chronulus",
     page_icon=":gear:",
     layout="centered",
     initial_sidebar_state="auto"

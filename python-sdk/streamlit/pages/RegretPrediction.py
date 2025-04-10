@@ -105,7 +105,7 @@ if api_key:
 st.subheader("Opportunity Details")
 st.markdown("Fill out the details below and then click 'Predict'.")
 
-company_name = st.text_input(label="Startup Name", placeholder="Name of the company")
+company_name = st.text_input(label="Startup Name (required)", placeholder="Name of the company")
 elevator_pitch = st.text_area(label="Elevator Pitch", placeholder="60 second elevator pitch")
 team = st.text_area(label="Team background and expertise", placeholder="Relevant domain expertise, prior startup experience, and complementary skill sets")
 market_opp = st.text_area(label='Market Opportunity', placeholder="Definition of the total addressable market (TAM), serviceable addressable market (SAM), and serviceable obtainable market (SOM)")
