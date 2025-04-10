@@ -7,10 +7,16 @@ from PIL import Image
 from typing import Optional
 import json
 
+
 def encode_image(image):
     buffered = io.BytesIO()
     image.save(buffered, format="WebP", quality=75)
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+
+def encode_pdf(pdf_file):
+    """Convert a PDF file to a base64 encoded string."""
+    return base64.b64encode(pdf_file.read()).decode('utf-8')
 
 
 def process_uploaded_images(uploaded_files, related_to: Optional[str], display_label: str):
@@ -24,6 +30,15 @@ def process_uploaded_images(uploaded_files, related_to: Optional[str], display_l
                 st.image(img, caption=file.name, width=150)
         images = [{"data": encode_image(Image.open(file)), "type": "WEBP"} for file in uploaded_files]
         return images
+    return []
+
+
+def process_uploaded_pdfs(uploaded_files, related_to: Optional[str], display_label: str):
+    if uploaded_files:
+        num_uploaded = len(uploaded_files)
+        st.write(f"{display_label} Pdfs ({num_uploaded})")
+        pdfs = [{"data": encode_pdf(file)} for file in uploaded_files]
+        return pdfs
     return []
 
 

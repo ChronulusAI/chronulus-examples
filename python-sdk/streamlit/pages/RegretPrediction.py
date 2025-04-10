@@ -6,11 +6,12 @@ from typing import List
 import streamlit as st
 from chronulus import Session
 from chronulus.estimator.binary_predictor import BinaryPredictor
-from chronulus_core.types.attribute import Image as ImageType, Pdf
+from chronulus_core.types.attribute import Pdf
 from pydantic import BaseModel, Field
 from streamlit_cookies_controller import CookieController
 
-from lib.tools import get_zip_file, process_uploaded_images, update_request_list_store, cache_inputs_and_outputs_state
+from lib.tools import get_zip_file, update_request_list_store, cache_inputs_and_outputs_state, \
+    process_uploaded_pdfs
 from pages._menu import menu
 from local_types.request import VCRegret
 
@@ -37,8 +38,8 @@ def get_session(session_id: str = None, env: dict = dict()):
                 probability of regret.
                 """,
             task="""
-                Please estimate the probability that I will regret passing on the opportunity to lead or join the round
-                of the startup described by the provided inputs.
+                Please estimate the probability that we will regret passing on the opportunity to lead or join the round
+                of the startup described by the provided inputs. 
                 """,
             env=env
         )
@@ -46,7 +47,6 @@ def get_session(session_id: str = None, env: dict = dict()):
         chronulus_session = Session.load_from_saved_session(session_id, env=env)
 
     return chronulus_session
-
 
 @st.cache_resource
 def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dict = dict()):
@@ -62,12 +62,13 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
 
 st.header("Missed Opportunity Regret Prediction")
 st.markdown("""
-This demo is set estimate the probability of regretting a missed investment opportunity.
+This demo is estimates the probability of regretting a missed investment opportunity.
 """)
 
 
 class StartupContext(BaseModel):
     name: str = Field(description="Name of startup")
+    elevator_pitch: str = Field(description="Elevator pitch")
     team: str = Field(description="Team background and expertise")
     market_opportunity: str = Field(description="Market Opportunity")
     traction_metrics: str = Field(description="Traction metrics")
@@ -93,18 +94,19 @@ if not api_key:
 if api_key:
     active_env = dict(CHRONULUS_API_KEY=api_key)
     estimator_id = None
-    session_id = controller.get('CHRONULUS_FIN_SESSION_ID')
+    session_id = controller.get('CHRONULUS_VC_SESSION_ID')
 
     chronulus_session = get_session(session_id, env=active_env)
-    controller.set("CHRONULUS_FIN_SESSION_ID", chronulus_session.session_id)
+    controller.set("CHRONULUS_VC_SESSION_ID", chronulus_session.session_id)
 
     agent = get_agent(chronulus_session, input_type=StartupContext, estimator_id=estimator_id, env=active_env)
-    controller.set("CHRONULUS_FIN_ESTIMATOR_ID", agent.estimator_id)
+    controller.set("CHRONULUS_VC_ESTIMATOR_ID", agent.estimator_id)
 
 st.subheader("Opportunity Details")
 st.markdown("Fill out the details below and then click 'Predict'.")
 
 company_name = st.text_input(label="Startup Name", placeholder="Name of the company")
+elevator_pitch = st.text_area(label="Elevator Pitch", placeholder="60 second elevator pitch")
 team = st.text_area(label="Team background and expertise", placeholder="Relevant domain expertise, prior startup experience, and complementary skill sets")
 market_opp = st.text_area(label='Market Opportunity', placeholder="Definition of the total addressable market (TAM), serviceable addressable market (SAM), and serviceable obtainable market (SOM)")
 traction_metrics = st.text_area(label="Traction Metrics", placeholder="Monthly recurring revenue (MRR), annual recurring revenue (ARR), user growth rate, customer acquisition cost (CAC), lifetime value (LTV), and retention rates.")
@@ -113,8 +115,8 @@ competition = st.text_area(label="Competitive landscape", placeholder="The uniqu
 gtm = st.text_area(label="Go-to-market strategy", placeholder="The plan to acquire and scale customers efficiently.")
 cap_efficiency = st.text_area(label="Capital efficiency:", placeholder="Use of previous funding and burn rate")
 use_of_funds = st.text_area(label="Use of funds", placeholder="Clear plan for how the new capital will be deployed to achieve specific milestones.")
-exit_opportunities = st.text_area(label="Use of funds", placeholder="Potential acquirers and comparable exits in the industry.")
-projections = st.text_area(label="Use of funds", placeholder="3-5 year forecasts with reasonable assumptions.")
+exit_opportunities = st.text_area(label="Exit Opportunities", placeholder="Potential acquirers and comparable exits in the industry.")
+projections = st.text_area(label="Financial Projections", placeholder="3-5 year forecasts with reasonable assumptions.")
 
 uploaded_pdfs = st.file_uploader(
     "Additional Materials as PDFs (optional)",
@@ -122,7 +124,7 @@ uploaded_pdfs = st.file_uploader(
     type=['pdf'],
 )
 
-additional_pdfs = process_uploaded_images(uploaded_pdfs, related_to=None, display_label='Additional Materials as PDFs ')
+additional_pdfs = process_uploaded_pdfs(uploaded_pdfs, related_to=None, display_label='Additional Materials as PDFs ')
 
 num_experts = int(st.text_input(label="Number of Experts", value=5))
 
@@ -136,6 +138,7 @@ if st.button("Predict", disabled=not (api_key or agent)) and company_name:
 
     item = StartupContext(
         name=company_name,
+        elevator_pitch=elevator_pitch,
         team=team,
         market_opportunity=market_opp,
         traction_metrics=traction_metrics,
@@ -146,7 +149,7 @@ if st.button("Predict", disabled=not (api_key or agent)) and company_name:
         use_of_funds=use_of_funds,
         exit_opportunities=exit_opportunities,
         projections=projections,
-        additional_pdfs=additional_pdfs,
+        additional_pdfs=[Pdf(**pdf) for pdf in additional_pdfs],
     )
 
     req = agent.queue(item, num_experts=num_experts, note_length=(7, 10))

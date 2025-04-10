@@ -115,7 +115,7 @@ def plot_beta(param_list, labels, notes):
         alpha, beta = params
         # Calculate PDF values
         pdf = stats.beta.pdf(x,  alpha, beta)
-        text = word_wrap(note, 65).replace('\n','<br>')
+        text = word_wrap(note, 60).replace('\n','<br>')
         # Create custom hover template with the explanation
         hovertemplate = (
             f"<b>{label} - Beta({alpha:.2f}, {beta:.2f})</b><br><br>"
