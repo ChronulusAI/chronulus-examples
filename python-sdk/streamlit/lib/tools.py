@@ -36,7 +36,7 @@ def process_uploaded_images(uploaded_files, related_to: Optional[str], display_l
 def process_uploaded_pdfs(uploaded_files, related_to: Optional[str], display_label: str):
     if uploaded_files:
         num_uploaded = len(uploaded_files)
-        st.write(f"{display_label} Pdfs ({num_uploaded})")
+        st.write(f"{display_label} ({num_uploaded})")
         pdfs = [{"data": encode_pdf(file)} for file in uploaded_files]
         return pdfs
     return []
