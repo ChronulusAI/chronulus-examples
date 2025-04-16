@@ -61,19 +61,16 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
 
 st.subheader("Tennis Predictions")
 st.markdown("""
-This demo is estimate the win probabilities for a singles or doubles match.
+This demo estimates the win probabilities for a singles or doubles match.
 
 We assume the player(s) listed first on the schedule are side 1 and the player(s) listed second are side 2.
 
-**Reverse Order of Sides**: When toggled on, this flips the order that the sides are input to the Chronulus Agent and
-provides a prediction that mitigates the framing bias that is imposed by the original order as listed on the schedule.
+**Reverse Order of Sides**: When toggled on, this flips the order that the sides are input to the  Chronulus Agent and provides a prediction that mitigates the framing bias that is imposed by the original order as listed on the schedule.
 
-The AI behind the Chronulus Agent was trained before Jan 1, 2025 and we have not given it internet search capabilities.
-So the agent is unaware of any outside win predictions or odds unless you provide them as inputs. As a best practice,
-providing your own inputs is the best way to ensure external opinion is not introduced to your predictions. For example,
-when taking a screen shot of a match-up, be sure to select on the areas with relevant information out the player. Many 
-sites have adds or odds near other useful player stats. Including these in the screenshot could lead to predictions that
-are swayed in the direction of the odds provided by the site.
+The AI behind the Chronulus Agent was trained before Jan 1, 2025 and we have not given it internet search capabilities. So the agent is unaware of any outside win predictions or odds unless you provide them as inputs. 
+
+As a best practice, providing your own inputs is the best way to ensure external opinion is not introduced to your predictions. For example, when taking a screen shot of a match-up, be sure to select only the areas with relevant information about the player. Many sites display odds near other useful player stats. Including these in the screenshot could lead to predictions that are swayed in the direction of the odds provided by the site.
+
 """)
 
 
