@@ -3,6 +3,7 @@ import streamlit as st
 
 entry = os.environ.get("ENTRY", st.secrets.to_dict().get("ENTRY"))
 
+
 def menu():
 
     if entry and entry == 'fin':
