@@ -11,6 +11,8 @@ from typing import TypeVar, Type, List
 
 
 import streamlit as st
+from streamlit.components.v1 import html as st_html
+
 from streamlit_cookies_controller import CookieController
 
 from local_types.request import RequestInfo, SportsWinProb
@@ -203,6 +205,18 @@ def plot_prediction_set(prediction_set):
         plot_beta([(alpha, beta)], labels=["Consensus"], notes=[note])
 
 
+def style_label(label, font_size='12px', font_color='black'):
+    html = f"""
+    <script>
+        var elems = window.parent.document.querySelectorAll('p');
+        var elem = Array.from(elems).find(x => x.innerText == '{label}');
+        elem.style.fontSize = '{font_size}';
+        elem.style.color = '{font_color}';
+    </script>
+    """
+    st_html(html, height=0, width=0)
+
+
 api_key = controller.get('CHRONULUS_API_KEY')
 
 if not api_key:
@@ -223,11 +237,25 @@ if api_key:
     req1_id = req_set1.get('request_id') if isinstance(req_set1, dict) else None
     req2_id = req_set2.get('request_id') if isinstance(req_set2, dict) else None
 
-    if req1_id and req2_id:
-        pred_set1 = get_prediction_set(req1_id, env=active_env)
-        pred_set2 = get_prediction_set(req2_id, env=active_env)
+    consensus_label = "Consensus Over Orderings"
+    style_label(consensus_label, font_size='1.2rem')
+    with st.expander(consensus_label):
 
-        with st.expander("Consensus Over Orderings", expanded=True):
+        if req1_id and req2_id:
+
+            st.markdown(r"""
+                                 This panel of plots the consensus Beta distributions for both the Original and Reverse Orderings.
+
+                                 **Notes:** 
+                                 - The distribution for the Reverse Ordering has been flipped ($ \alpha $  and $ \beta $ exchanged) to be comparable with the plot of 
+                                 the Original Ordering. 
+                                 - $ \underset{overall}{Beta} (\alpha, \beta) $ is the consensus of $ \underset{original}{Beta} (\alpha, \beta) $ and $ \underset{reverse}{Beta} (\beta, \alpha) $ 
+
+                              """)
+
+            pred_set1 = get_prediction_set(req1_id, env=active_env)
+            pred_set2 = get_prediction_set(req2_id, env=active_env)
+
 
             if api_key and req1_id and req2_id:
                 param_list = []
@@ -257,15 +285,48 @@ if api_key:
 
                 plot_beta(param_list, labels=labels, notes=notes)
 
-    with st.expander("Original Ordering", expanded=True):
+    original_ordering_label = "Original Ordering"
+    style_label(original_ordering_label, font_size='1.2rem')
+
+    with st.expander(original_ordering_label, expanded=True):
 
         if api_key and req1_id:
+            st.markdown(r"""
+                            This panel plots the Beta distributions of the expert opinions for the Original Ordering of sides as they 
+                            were input to the prediction form.
+
+                            **Notes:** 
+                            - The distribution plotted is **relative to the probability of side 1** in both the Positive and Negative 
+                            Framings. 
+                            - When you hover to read the tooltip, the $ Beta(\alpha,\beta) $ shown at the top of the tip 
+                            corresponds to the probability that is indicated by a * in the Pred section.
+                            - For **Positive Framings**, $ Beta(\alpha,\beta) $ will be shown in the tool tip and also be plot plotted.
+                            - For **Negative Framings**, $ Beta(\alpha,\beta) $ will be shown in the tool tip, but $ Beta(\beta, \alpha) $ will be plotted.
+
+                            """)
             pred_set1 = get_prediction_set(req1_id, env=active_env)
             plot_prediction_set(pred_set1)
 
-    with st.expander("Reverse Ordering", expanded=True):
+    reverse_ordering_label = "Reverse Ordering"
+    style_label(reverse_ordering_label, font_size='1.2rem')
+    with st.expander(reverse_ordering_label, expanded=True):
+
+
 
         if api_key and req2_id:
+            st.markdown(r"""
+                           This panel plots the Beta distributions of the expert opinions for the Reverse Ordering of 
+                           sides from which they were input to the prediction form. 
+
+                           **Notes:** 
+                           - The distribution plotted is **relative to the probability of side 2** in both the Positive and Negative 
+                           Framings. 
+                           - When you hover to read the tooltip, the $ Beta(\alpha,\beta) $ shown at the top of the tip 
+                           corresponds to the probability that is indicated by a * in the Pred section.
+                           - For **Positive Framings**, $ Beta(\alpha,\beta) $ will be shown in the tool tip and also be plot plotted.
+                           - For **Negative Framings**, $ Beta(\alpha,\beta) $ will be shown in the tool tip, but $ Beta(\beta, \alpha) $ will be plotted.
+
+                           """)
             pred_set2 = get_prediction_set(req2_id, env=active_env)
             plot_prediction_set(pred_set2)
 
