@@ -36,8 +36,8 @@ def get_session(session_id: str = None, env: dict = dict()):
                 the size of my wagers on tennis matches.
                 """,
             task="""
-                Please predict the probability that side1 (player or team if a doubles match) will win the match against
-                side2 (player or team if a doubles match) given the information provided.
+                Please predict the probability that the SUBJECT (player or team if a doubles match) will win the match against
+                the OBJECT (player or team if a doubles match) given the information provided.
                 """,
             env=env
         )
@@ -79,13 +79,13 @@ class MatchContext(BaseModel):
     location: str = Field(description="Location of tournament and contest")
     match_date: str = Field(description="Date of match")
     contest_details: str = Field(description="Additional details on the contest that affect both sides, eg. weather or previous history between the players")
-    side1: str = Field(description="The name(s) of the player(s) on side1")
-    side2: str = Field(description="The name(s) of the player(s) on side2")
-    side1_details: str = Field(description="Additional context or details about side1")
-    side2_details: str = Field(description="Additional context or details about side2")
+    side1: str = Field(description="The name(s) of the SUBJECT player(s)")
+    side2: str = Field(description="The name(s) of the OBJECT player(s)")
+    side1_details: str = Field(description="Additional context or details about the SUBJECT player(s)")
+    side2_details: str = Field(description="Additional context or details about the OBJECT player(s)")
     contest_images: List[ImageType] = Field(description="Images providing data or context on the match-up, contest, or tournament broadly")
-    side1_images: List[ImageType] = Field(description="Images providing data or context on the side1")
-    side2_images: List[ImageType] = Field(description="Images providing data or context on the side2")
+    side1_images: List[ImageType] = Field(description="Images providing data or context on the SUBJECT player(s)")
+    side2_images: List[ImageType] = Field(description="Images providing data or context on the OBJECT player(s)")
 
 
 controller = CookieController()
@@ -97,16 +97,18 @@ if not api_key:
     st.subheader("API Key Not Found")
     st.write("Your Chronulus API could not be found.")
 
+cookie_stub = "TENNIS_V2"
+
 if api_key:
     active_env = dict(CHRONULUS_API_KEY=api_key)
     estimator_id = None
-    session_id = controller.get('CHRONULUS_TENNIS_SESSION_ID')
+    session_id = controller.get(f'CHRONULUS_{cookie_stub}_SESSION_ID')
 
     chronulus_session = get_session(session_id, env=active_env)
-    controller.set("CHRONULUS_TENNIS_SESSION_ID", chronulus_session.session_id)
+    controller.set(f"CHRONULUS_{cookie_stub}_SESSION_ID", chronulus_session.session_id)
 
     agent = get_agent(chronulus_session, input_type=MatchContext, estimator_id=estimator_id, env=active_env)
-    controller.set("CHRONULUS_TENNIS_ESTIMATOR_ID", agent.estimator_id)
+    controller.set(f"CHRONULUS_{cookie_stub}_ESTIMATOR_ID", agent.estimator_id)
 
 st.subheader("Contest Details")
 st.markdown("Fill out the details below and then click 'Predict'.")
