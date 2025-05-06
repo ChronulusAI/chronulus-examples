@@ -62,7 +62,10 @@ def get_agent(_chronulus_session, input_type, estimator_id: str = None, env: dic
 
 st.header("Missed Opportunity Regret Prediction")
 st.markdown("""
-This demo is estimates the probability of regretting a missed investment opportunity.
+This demo estimates the probability you will regret passing on an investment opportunity.
+
+Input details about the investment opportunity below or simply upload the pitch deck any other supporting materials
+in PDF format. Then click **Predict**.
 """)
 
 
