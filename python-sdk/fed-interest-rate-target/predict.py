@@ -36,7 +36,7 @@ chronulus_session = Session(
     Our team is responsible for updating and logging interest rate movement signals. 
     """,
 
-    task="""We would like to estimate the probability (as of today) that the Fed will change the 
+    task="""We would like to estimate the probability (as of today, March 30, 2025) that the Fed will change the 
     target fed funds range from its current one to the candidate range at the meeting date specified.
     """,
 )
