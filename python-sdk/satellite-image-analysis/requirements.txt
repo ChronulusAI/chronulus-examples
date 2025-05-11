@@ -1,0 +1,5 @@
+chronulus>=0.0.14
+matplotlib
+pandas
+scipy
+numpy
