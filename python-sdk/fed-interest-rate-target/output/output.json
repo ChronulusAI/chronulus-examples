@@ -1,0 +1,143 @@
+{
+  "predictions": [
+    {
+      "positive": {
+        "prob_a": 0.22240636909919353,
+        "question": "What is the probability that the Fed will lower its target federal funds rate range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 FOMC meeting?",
+        "notes": "Given recent economic data showing persistent inflation above target and solid economic growth, I expect a relatively low probability of a rate cut at the May meeting. My prediction carries moderate uncertainty due to increased economic headwinds from recent tariff policies and slightly softening labor markets. Results are somewhat skewed toward lower probabilities, reflecting the Fed's current cautious stance and their recent decision to slow the pace of balance sheet reduction rather than cut rates. The distribution suggests outcomes are concentrated around maintaining current rates, though there remains a small but meaningful chance of a cut if economic conditions deteriorate more quickly than expected.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 1.7423538539938874,
+          "beta": 6.091746675819606
+        }
+      },
+      "negative": {
+        "prob_a": 0.31493707844434504,
+        "question": "What is the probability that the Fed will NOT lower the target fed funds range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 meeting?",
+        "notes": "Given recent Fed communications and economic data, I expect the Fed to remain cautious about cutting rates too quickly. The March FOMC statement noted that while inflation has moderated, it remains \"somewhat elevated,\" suggesting continued policy restraint. My prediction shows significant uncertainty, with results skewed toward maintaining current rates given heightened global trade tensions from new tariffs that could reignite inflation pressures. However, there is a meaningful chance of rate cuts given the gradual upward drift in unemployment and the Fed's projected path of two more cuts in 2025.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 4.344346315899184,
+          "beta": 9.449984721139717
+        }
+      },
+      "beta_params": {
+        "alpha": 1.7797325237367743,
+        "beta": 5.388366676796453
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.22847220274053515,
+        "question": "What is the probability that the Fed will lower its target federal funds rate range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 FOMC meeting?",
+        "notes": "Given recent economic data showing solid growth but elevated inflation, I expect a relatively low probability of a rate cut at the May meeting. Current Fed communication suggests they are in no rush to cut rates, with the March statement noting \"uncertainty around the economic outlook has increased.\" My prediction reflects higher uncertainty due to the new tariffs scheduled for April, which could reignite inflationary pressures. Results are lopsided toward lower probabilities, reflecting the Fed's historically cautious approach to initiating rate cut cycles.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 3.61561388839065,
+          "beta": 12.209566790139107
+        }
+      },
+      "negative": {
+        "prob_a": 0.2677459130076389,
+        "question": "What is the probability that the Fed will NOT lower the target fed funds range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 meeting?",
+        "notes": "I expect that the Fed will maintain its cautious stance, with recent economic data and policy statements suggesting resistance to rapid rate reductions. The combination of persistent inflation concerns, solid economic growth, and elevated geopolitical tensions from new tariffs points toward policy stability. Results are skewed toward maintaining current rates, though there remains some possibility of a cut given the Fed's earlier projections of two rate cuts in 2025. The uncertainty is concentrated around whether economic conditions will deteriorate enough to justify easing by May.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 5.968627152617628,
+          "beta": 16.323504538846663
+        }
+      },
+      "beta_params": {
+        "alpha": 4.124052300860551,
+        "beta": 12.884144302078347
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.27633657193991057,
+        "question": "What is the probability that the Fed will lower its target federal funds rate range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 FOMC meeting?",
+        "notes": "Given recent economic data showing inflation remains somewhat elevated at 2.6% and labor markets remain solid, I expect a relatively low probability of a rate cut at the May meeting. The Fed's recent communications suggest they are being patient and data-dependent before initiating rate cuts. The results are skewed slightly right, reflecting some possibility that new tariffs could create enough economic pressure to justify a cut. My prediction carries moderate uncertainty given the long forecast horizon and complex mix of inflation, employment, and trade policy factors at play.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 3.406824299160661,
+          "beta": 8.921707806613147
+        }
+      },
+      "negative": {
+        "prob_a": 0.31557555564583817,
+        "question": "What is the probability that the Fed will NOT lower the target fed funds range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 meeting?",
+        "notes": "Given the recent March FOMC statement indicating continued economic expansion, solid labor markets, and somewhat elevated inflation, I expect the Fed to remain cautious about rate cuts. Recent tariff implementations are likely to create upward pressure on inflation, pushing against rate cuts. The outcomes are slightly skewed toward maintaining current rates, though there is meaningful uncertainty given the time horizon to May. While extreme outcomes are relatively unlikely, there is a moderate concentration of probability around maintaining current rates.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 4.580218547648902,
+          "beta": 9.933638643461162
+        }
+      },
+      "beta_params": {
+        "alpha": 3.683144517072467,
+        "beta": 8.890793504580353
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.3191876757182566,
+        "question": "What is the probability that the Fed will lower its target federal funds rate range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 FOMC meeting?",
+        "notes": "Based on recent Fed communications and economic data, I expect a moderate likelihood of a rate cut at the May meeting. The March FOMC statement noted \"somewhat elevated\" inflation and increased uncertainty, while maintaining rates steady. My prediction reflects that ongoing trade tensions and tariffs create upward pressure on prices, tempering the Fed's ability to cut rates quickly. Results are lopsided toward lower probabilities given the Fed's historically cautious approach to policy changes and their recent signals about maintaining restrictive policy until inflation is convincingly returning to target.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 6.962468468721264,
+          "beta": 14.850618308686006
+        }
+      },
+      "negative": {
+        "prob_a": 0.26649388827161535,
+        "question": "What is the probability that the Fed will NOT change the target fed funds range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 meeting?",
+        "notes": "Given the recent Fed statements and economic data, I expect the Fed to maintain a cautious stance. While inflation has moderated to 2.6%, it remains above target, and the Fed has emphasized patience in its recent communications. Results are skewed toward maintaining current rates, especially given the new tariffs adding inflationary pressure. However, there is some risk of extreme outcomes given the complex interaction between monetary policy and the escalating trade tensions.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 4.351350235074262,
+          "beta": 11.976792460038086
+        }
+      },
+      "beta_params": {
+        "alpha": 4.848806554169461,
+        "beta": 12.073501369927513
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.3766031887260283,
+        "question": "What is the probability that the Fed will lower its target federal funds rate range from 4.25%-4.50% to 4.00%-4.25% at the May 7, 2025 FOMC meeting?",
+        "notes": "Given the recent Fed statements and economic data, I expect a moderate probability of a rate cut at the May meeting. The FOMC's latest projections suggest two more cuts in 2025, with elevated uncertainty around timing. Recent data shows inflation trending down toward target while unemployment has begun drifting up, though economic activity remains solid. The new tariff policies create upside inflation risks that could delay cuts, making outcomes skewed toward maintaining current rates. Results are likely concentrated around the mean prediction given clear Fed communication and relatively stable economic conditions.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 6.74198228355336,
+          "beta": 11.16010268381006
+        }
+      },
+      "negative": {
+        "prob_a": 0.268995048748899,
+        "question": "What is the probability that the Fed will NOT change the target fed funds range from 4.25%-4.50% to 4.00%-4.25% at the May 07, 2025 meeting?",
+        "notes": "I expect that there is a strong likelihood that the Fed will maintain current rates at the May meeting, given the recent pause in the rate cut cycle and persistent economic uncertainty. The forecast is skewed toward maintaining rates, particularly due to still-elevated inflation at 2.6% and the Fed's cautious approach evidenced in recent meetings. While two rate cuts are projected for 2025, recent tariff implementations and their potential inflationary impact create additional uncertainty that favors policy stability in the near term.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 3.2521910904430564,
+          "beta": 8.8379611468158
+        }
+      },
+      "beta_params": {
+        "alpha": 3.445148766164694,
+        "beta": 7.967888237328625
+      }
+    }
+  ],
+  "beta_params": {
+    "alpha": 2.3819562483979597,
+    "beta": 6.6475096803458325
+  },
+  "prob_a": 0.2637981323807204,
+  "prob": [
+    0.2637981323807204,
+    0.7362018676192796
+  ]
+}

@@ -1,5 +1,9 @@
+import os
+import json
+
 import numpy as np
 import matplotlib.pyplot as plt
+from chronulus.prediction import BinaryPredictionSet
 from scipy.stats import beta
 
 
@@ -119,3 +123,21 @@ def plot_prediction_set(prediction_set, output_file: str, negate=False, figsize=
     )
 
     plt.savefig(output_file)
+
+
+def save_predictions(prediction_set: BinaryPredictionSet, output_path: str ):
+    os.makedirs(output_path, exist_ok=True)
+    plot_prediction_set(prediction_set, f"{output_path}/prediction_set.png", figsize=(8, 4))
+
+    with open(f"{output_path}/output.txt", "w") as f:
+        output = prediction_set.text
+        lines = [
+            f"{prediction_set.prob} with Beta({prediction_set.beta_params.alpha}, {prediction_set.beta_params.beta})",
+            output
+        ]
+        final_output = "\n\n".join(lines)
+        f.write(final_output)
+
+    json_str = json.dumps(prediction_set.to_dict(), indent=2)
+    with open(f"{output_path}/output.json", "w") as f:
+        f.write(json_str)

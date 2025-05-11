@@ -10,7 +10,7 @@ from chronulus.estimator import BinaryPredictor
 from chronulus_core.types.attribute import PdfFromFile, TextFromFile
 
 
-from beta_plot import plot_prediction_set
+from beta_plot import save_predictions
 
 chronulus_session = Session(
     name="Federal Reserve Interest Rate Target Prediction",
@@ -74,15 +74,4 @@ req = agent.queue(context, num_experts=5)
 
 prediction_set = agent.get_request_predictions(req.request_id, try_every=5)
 
-os.makedirs("output", exist_ok=True)
-
-plot_prediction_set(prediction_set, "output/prediction_set-betas.png", figsize=(8, 4))
-
-
-with open("output/fed-funds-may2025.txt", "w") as f:
-    f.write(prediction_set.text)
-
-
-json_str = json.dumps(prediction_set.to_dict(), indent=2)
-with open("output/fed-funds-may2025.json", "w") as f:
-    f.write(json_str)
+save_predictions(prediction_set=prediction_set, output_path="output")
