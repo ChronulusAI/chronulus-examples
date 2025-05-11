@@ -1,0 +1,143 @@
+{
+  "predictions": [
+    {
+      "positive": {
+        "prob_a": 0.13826372248946034,
+        "question": "What is the probability that all four S-300/S-400 systems indicated by red arrows in the satellite image are real, active air defense systems rather than decoys or non-functional units?",
+        "notes": "Based on the satellite imagery analysis, I observe concerning patterns in the deployment that suggest potential deception. The systems appear too regularly spaced and exposed for actual high-value air defense assets, which typically employ more sophisticated concealment. The apparent lack of supporting equipment, personnel activity, and associated infrastructure that would normally accompany operational S-300/S-400 batteries raises significant doubts. I expect there's a high likelihood that at least some of these are decoys, with my analysis suggesting only a small chance all four are genuine active systems. The uncertainty is skewed toward the lower probabilities, though there remains a small but non-zero chance these could be real systems deliberately positioned to create strategic ambiguity.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 2.2674034882628185,
+          "beta": 14.131717318249965
+        }
+      },
+      "negative": {
+        "prob_a": 0.28348687620222635,
+        "question": "What is the probability that the systems indicated in the analysis image are NOT all real, active versions of the S-300/S-400 air defense systems (i.e., that at least one is a decoy or non-functional)?",
+        "notes": "Looking at the satellite imagery, I expect there's a relatively high likelihood that at least one of these systems is a decoy, given several concerning indicators. The spacing and positioning appears somewhat artificial and theatrical, lacking the typical operational security measures I would expect for such valuable assets. My uncertainty is moderately high given the resolution limitations, but the results are skewed toward finding at least one fake system, particularly because the visible shadows and dimensions show some inconsistencies typical of decoy deployments. The placement pattern suggests these could be part of a deception operation, especially given Russia's documented use of such tactics in this conflict.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 2.851492539070781,
+          "beta": 7.207147837059572
+        }
+      },
+      "beta_params": {
+        "alpha": 2.2355636698180974,
+        "beta": 11.217791504805442
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.11805761673341969,
+        "question": "What is the probability that the four S-300/S-400 air defense systems shown in the satellite image are genuine, operational systems rather than decoys or non-functional units?",
+        "notes": "Based on my analysis of the satellite imagery, the positioning and spacing of these systems appears somewhat suspicious. The uniform angular placement in a rough square formation is atypical of real Russian air defense deployments, which typically feature more irregular spacing and terrain-based positioning. I observe a lack of supporting equipment and infrastructure that would normally accompany operational S-300/S-400 batteries. The shadows and visual signatures suggest these could be inflatable or constructed decoys, which Russia is known to employ. My expectation leans strongly toward these being decoy systems, with very low probability of all four being genuine operational units.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 2.1812169248994717,
+          "beta": 16.294650920415194
+        }
+      },
+      "negative": {
+        "prob_a": 0.2774101996325246,
+        "question": "What is the probability that the systems indicated in the analysis image are NOT all real, active versions of the S-300/S-400 air defense systems (i.e., that at least one is a decoy or non-functional)?",
+        "notes": "Based on the satellite imagery analysis, I expect a significant probability that at least one of these systems is a decoy, given the somewhat unusual spacing and positioning that doesn't fully align with typical Russian air defense deployment patterns. My certainty in this assessment is moderately high due to several visual indicators, including the uniform shadows and lack of visible support equipment typically associated with active S-300/S-400 batteries. The distribution is somewhat skewed toward higher probabilities of decoys being present, with particular suspicion around the two systems positioned at the top of the image.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 2.7408482710122515,
+          "beta": 7.139279693435182
+        }
+      },
+      "beta_params": {
+        "alpha": 2.129749930792242,
+        "beta": 12.763737541551535
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.22408967814762926,
+        "question": "What is the probability that the four Russian surface-to-air missile systems shown in the satellite image are genuine, operational S-300 or S-400 systems rather than decoys or non-functional replicas?",
+        "notes": "Based on the satellite imagery analysis, I expect these are likely decoys rather than operational systems. The uniform spacing and positioning appears too deliberate and theatrical, lacking the tactical dispersion typically seen in real Russian air defense deployments. The shadows and detailed features suggest these may be inflatable or constructed decoys, which Russia is known to employ. Given Russia's documented use of deception tactics in Ukraine and the vulnerability of high-value air defense assets to precision strikes, I assess with moderate to high confidence that these are predominantly decoy systems.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 1.742232141689192,
+          "beta": 6.032477323248401
+        }
+      },
+      "negative": {
+        "prob_a": 0.12850897568817607,
+        "question": "What is the probability that the systems indicated in the analysis image are NOT all real, active versions of the S-300/S-400 air defense systems (i.e., that at least one is a decoy or non-functional)?",
+        "notes": "Based on the satellite imagery analysis, I expect there is a high likelihood that at least one of these systems is a decoy, given the somewhat artificial uniformity in their positioning and shadows. The distribution is skewed toward higher probabilities of deception, as Russian forces are known to extensively use decoys, particularly for high-value air defense assets. I have relatively high certainty in this assessment due to several visual indicators, including the unusually regular spacing and identical orientations of the systems, which is atypical for actual defensive deployments that would typically show more tactical consideration in their placement.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 1.2591060515151258,
+          "beta": 8.538700247792063
+        }
+      },
+      "beta_params": {
+        "alpha": 1.2748838972124799,
+        "beta": 7.302811099536516
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.2242374279868366,
+        "question": "What is the probability that the four missile systems shown in the satellite image are real, operational S-300/S-400 air defense systems rather than decoys or non-functional units?",
+        "notes": "Based on the satellite imagery analysis, I estimate a relatively low probability that all four systems are real and operational. The uniform spacing and positioning appears somewhat artificial and doesn't follow typical Russian tactical deployment patterns. The systems' shadows and dimensional characteristics match S-300/S-400 profiles, but the lack of supporting equipment, personnel activity, and defensive positions typically associated with high-value air defense assets raises significant concerns. I predict with moderate certainty that at least some of these are sophisticated decoys, with a slight chance that one or two could be real systems mixed with decoys as part of a deception strategy.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 1.7483380714935495,
+          "beta": 6.04847839750458
+        }
+      },
+      "negative": {
+        "prob_a": 0.2833677184936006,
+        "question": "What is the probability that the systems indicated in the analysis image are decoys, decorative, or non-functional versions of the S-300/S-400 air defense systems (i.e., NOT real, active versions)?",
+        "notes": "Based on the satellite imagery, I observe several suspicious patterns that suggest these may be decoys. The systems appear too uniformly positioned and lack the typical supporting infrastructure and security measures usually associated with active S-300/S-400 batteries. I expect with moderate confidence that these are likely decoys, given Russia's known use of inflatable and mock air defense systems. The uncertainty is somewhat skewed toward higher probabilities of being decoys, as the positioning and visible characteristics align more closely with known deception tactics than operational deployments.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 2.6256334652183333,
+          "beta": 6.6401836828194005
+        }
+      },
+      "beta_params": {
+        "alpha": 1.8100941307264888,
+        "beta": 5.496181498692615
+      }
+    },
+    {
+      "positive": {
+        "prob_a": 0.2388081416419064,
+        "question": "What is the probability that the S-300/S-400 systems shown in the satellite image are real, operational air defense systems rather than decoys or non-functional units?",
+        "notes": "Based on the satellite imagery analysis, I expect these systems are more likely to be decoys than operational units. The placement pattern appears too symmetrical and exposed for actual high-value air defense assets, which typically employ more sophisticated concealment techniques. The uniform shadows and spacing suggest these may be inflatable or mock systems used for deception. Given Russian military doctrine emphasizing maskirovka (military deception), and the vulnerability of actual S-300/400 systems to precision strikes, I assess with moderate confidence that these are likely elaborate decoys, though there remains some possibility that one or more could be real systems deliberately placed to create targeting uncertainty.",
+        "negative": false,
+        "beta_params": {
+          "alpha": 3.5166279217062524,
+          "beta": 11.209117597386843
+        }
+      },
+      "negative": {
+        "prob_a": 0.2803114107613837,
+        "question": "What is the probability that the systems indicated in the analysis image are NOT all real, active versions of the S-300/S-400 systems (i.e., that at least one is a decoy or non-functional)?",
+        "notes": "Based on the satellite imagery, I expect a fairly high probability that at least one of these systems is a decoy, given the somewhat regular geometric spacing pattern which is more characteristic of Russian deception tactics than actual operational deployment. The shadows and dimensions appear slightly inconsistent across the units, particularly noticeable in the rightmost launchers, suggesting possible variations in construction quality consistent with decoys. My confidence in this assessment is bolstered by historical Russian use of inflatable and mock S-300/400 systems, though there remains significant uncertainty given image resolution limitations.",
+        "negative": true,
+        "beta_params": {
+          "alpha": 3.172848156713161,
+          "beta": 8.1461636098612
+        }
+      },
+      "beta_params": {
+        "alpha": 3.3693256521627744,
+        "beta": 9.772839914190389
+      }
+    }
+  ],
+  "beta_params": {
+    "alpha": 1.5856077418530454,
+    "beta": 8.026273714634048
+  },
+  "prob_a": 0.1649633059907239,
+  "prob": [
+    0.1649633059907239,
+    0.8350366940092762
+  ]
+}
