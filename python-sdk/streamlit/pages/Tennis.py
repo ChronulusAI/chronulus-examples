@@ -65,11 +65,20 @@ This demo estimates the win probabilities for a singles or doubles match.
 
 We assume the player(s) listed first on the schedule are side 1 and the player(s) listed second are side 2.
 
-**Reverse Order of Sides**: When toggled on, this flips the order that the sides are input to the  Chronulus Agent and provides a prediction that mitigates the framing bias that is imposed by the original order as listed on the schedule.
+###### Choosing Inputs
 
 The AI behind the Chronulus Agent was trained before Jan 1, 2025 and we have not given it internet search capabilities. So the agent is unaware of any outside win predictions or odds unless you provide them as inputs. 
 
-As a best practice, providing your own inputs is the best way to ensure external opinion is not introduced to your predictions. For example, when taking a screen shot of a match-up, be sure to select only the areas with relevant information about the player. Many sites display odds near other useful player stats. Including these in the screenshot could lead to predictions that are swayed in the direction of the odds provided by the site.
+As a best practice, providing your own inputs is the best way to ensure external opinion is not introduced to your predictions. For example, when taking a screenshot of a match-up, be sure to select only the areas with relevant information about the player. Many sites display odds near other useful player stats. Including these odds in the screenshot could lead to predictions that are swayed in the direction of the odds provided by the site. So if your goal is to identify an edge over the books odds, it would be counter productive to include the books odds in your inputs.
+
+###### Reverse Order of Sides (Mitigate Order Bias)
+
+When toggled on, this flips the order that the sides are input to the  Chronulus Agent and provides a prediction that mitigates the framing bias that is imposed by the original order as listed on the schedule.
+
+
+###### Image Upload Errors
+
+If you encounter an `AxiosError` uploading an image, see the [FAQ](/FAQs) page for info on resolving the issue.
 
 """)
 
