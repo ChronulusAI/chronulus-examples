@@ -20,17 +20,18 @@ def encode_pdf(pdf_file):
 
 
 def process_uploaded_images(uploaded_files, related_to: Optional[str], display_label: str):
+    images = []
     if uploaded_files:
         num_uploaded = len(uploaded_files)
         st.write(f"{display_label} Images ({num_uploaded}):")
         cols = st.columns(num_uploaded)  # Create columns for each image
+
         for i, file in enumerate(uploaded_files):
             with cols[i]:
                 img = Image.open(file)
                 st.image(img, caption=file.name, width=150)
-        images = [{"data": encode_image(Image.open(file)), "type": "WEBP"} for file in uploaded_files]
-        return images
-    return []
+                images.append({"data": encode_image(Image.open(file)), "type": "WEBP"})
+    return images
 
 
 def process_uploaded_pdfs(uploaded_files, related_to: Optional[str], display_label: str):
