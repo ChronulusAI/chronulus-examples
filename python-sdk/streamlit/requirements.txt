@@ -1,6 +1,7 @@
 pandas
 streamlit~=1.44.0
 streamlit-cookies-controller
+tornado<=6.4.2
 plotly
 scipy
-chronulus>=0.0.13
+chronulus>=0.0.14
