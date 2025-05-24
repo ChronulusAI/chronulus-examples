@@ -35,8 +35,8 @@ def get_session(session_id: str = None, env: dict = dict()):
                 the size of my wagers on basketball games.
                 """,
             task="""
-                Please predict the probability that side1 (team) will win the match against
-                side2 (team) given the information provided.
+                Please predict the probability that the SUBJECT team will win the game against
+                the OBJECT team given the information provided.
                 """,
             env=env
         )
@@ -77,14 +77,14 @@ class GameContext(BaseModel):
     contest_name: str = Field(description="Name of the contest or tournament")
     location: str = Field(description="Location of tournament and contest")
     game_date: str = Field(description="Date of game")
-    contest_details: str = Field(description="Additional details on the contest that affect both sides, eg. weather or previous history between the players")
-    side1: str = Field(description="The name(s) of the player(s) on side1")
-    side2: str = Field(description="The name(s) of the player(s) on side2")
-    side1_details: str = Field(description="Additional context or details about side1")
-    side2_details: str = Field(description="Additional context or details about side2")
+    contest_details: str = Field(description="Additional details on the game or tournament, eg. previous history between the teams over the current season or playoff")
+    side1: str = Field(description="The name of the SUBJECT team")
+    side2: str = Field(description="The name of the OBJECT team")
+    side1_details: str = Field(description="Additional context or details about the SUBJECT team")
+    side2_details: str = Field(description="Additional context or details about the OBJECT team")
     contest_images: List[ImageType] = Field(description="Images providing data or context on the match-up, contest, or tournament broadly")
-    side1_images: List[ImageType] = Field(description="Images providing data or context on the side1")
-    side2_images: List[ImageType] = Field(description="Images providing data or context on the side2")
+    side1_images: List[ImageType] = Field(description="Images providing data or context on the SUBJECT team")
+    side2_images: List[ImageType] = Field(description="Images providing data or context on the OBJECT team")
 
 
 controller = CookieController()
